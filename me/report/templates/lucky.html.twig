@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Lucky color{% endblock %}
+
+{% block body %}
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+</head>
+
+<body style="text-align:center;" id="body">
+	<h1>Välkommen till festen!</h1>
+
+	<button type="button" onclick="changecolor()">
+		Disco!
+	</button>
+
+	<script>
+		function changecolor()
+		{
+			// Generating random color each time
+			var color = "#"+(Math.random()*16777215|0).toString(16);
+			
+			$("body").css("background-color",color);
+		}
+	</script>
+    
+    <div id="timestamp-container">
+        <p>Just nu är datum och klockslag: <span id="timestamp"></span></p>
+        <script>
+        // Get current date and time
+        const now = new Date();
+        // Format date and time
+        const options = { timeZone: 'Europe/Stockholm', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const formattedTime = now.toLocaleString('sv-SE', options);
+        // Set timestamp element to formatted date and time
+        document.getElementById('timestamp').textContent = formattedTime;
+        </script>
+    </div>
+
+    <img src="{{ asset('img/dance.gif') }}" alt="My animated GIF">
+
+</body>
+
+{% endblock %}
