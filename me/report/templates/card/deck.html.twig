@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Deck of Cards{% endblock %}
+
+{% block body %}
+    <h1>Deck of Cards</h1>
+    <table>
+        <tr>
+            <th>Card</th>
+            <th>Suit</th>
+            <th>Value</th>
+        </tr>
+        {% for suit, cards in cards %}
+            {% for card in cards %}
+                <tr>
+                    <td>{{ card }}</td>
+                    <td>{{ suit }}</td>
+                    <td>{{ card.getValue() }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+{% endblock %}
