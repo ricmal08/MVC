@@ -13,7 +13,7 @@
         {% for suit, cards in cards %}
             {% for card in cards %}
                 <tr>
-                    <td>{{ card }}</td>
+                    <td>{{ card.getAsHtmlString()|raw }}</td>
                     <td>{{ suit }}</td>
                     <td>{{ card.getValue() }}</td>
                 </tr>

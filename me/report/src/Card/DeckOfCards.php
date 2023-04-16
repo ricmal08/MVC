@@ -13,7 +13,7 @@ class DeckOfCards
 
         foreach ($suits as $suit) {
             foreach ($ranks as $rank) {
-                $this->cards[] = new Card($suit, $rank);
+                $this->cards[] = new CardGraphic($suit, $rank);
             }
         }
     }
@@ -24,11 +24,24 @@ class DeckOfCards
     }
 
     public function drawCard(): Card
-    {
-        $card = array_shift($this->cards);
-        $card->value = rand(1, 10); // generate a random value for the card
-        return $card;
+{
+    $card = array_shift($this->cards);
+    switch ($card->rank) {
+        case 'ace':
+            $value = rand(1, 11);
+            break;
+        case 'king':
+        case 'queen':
+        case 'jack':
+            $value = 10;
+            break;
+        default:
+            $value = intval($card->rank);
+            break;
     }
+    $card->value = $value;
+    return $card;
+}
 
     public function dealHand(int $size): CardHand
     {
