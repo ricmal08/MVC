@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shuffled Deck{% endblock %}
+
+{% block body %}
+<h1>Draw a card</h1>
+<p>The card drawn is: {{ card.getAsHtmlString()|raw }}</p>
+<p>Remaining cards in deck: {{ remainingCards }}</p>
+
+{% endblock %}
