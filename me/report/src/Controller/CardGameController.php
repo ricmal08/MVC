@@ -39,57 +39,74 @@ class CardGameController extends AbstractController
     }
 
     #[Route('/card/deck/shuffle', name: 'card_deck_shuffle')]
-    public function shuffleDeck(): Response
-    {
+    public function shuffleDeck(SessionInterface $session): Response
+{
+    // Hämta kortleken från sessionen
+    $deck = $session->get('deck');
+
+    // Skapa en ny kortlek om den inte finns i sessionen
+    if (!$deck) {
         $deck = new DeckOfCards();
-        $deck->shuffle();
-    
-        return $this->render('card/shuffle.html.twig', [
-            'deck' => $deck,
-        ]);
     }
+
+    // Blanda kortleken
+    $deck->shuffle();
+
+    // Spara kortleken i sessionen
+    $session->set('deck', $deck);
+
+    return $this->redirectToRoute('card_deck');
+}
 
     #[Route('/card/deck/draw', name: 'card_deck_draw')]
     public function drawCard(Request $request, SessionInterface $session): Response
     {
         $deck = $session->get('deck');
-    
+        
         if (!$deck) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set('deck', $deck);
         }
-    
+        
         $drawnCard = $deck->drawCard();
         $remainingCards = count($deck->getCards());
-    
+        
+        $drawnCards = $session->get('drawn_cards', []);
+        $drawnCards[] = $drawnCard;
+        $session->set('drawn_cards', $drawnCards);
+        
         return $this->render('card/draw.html.twig', [
             'card' => $drawnCard,
             'remainingCards' => $remainingCards,
         ]);
     }
 
-        #[Route('/card/deck/draw/{count}', name: 'card_deck_draw_count')]
+    #[Route('/card/deck/draw/{count}', name: 'card_deck_draw_count')]
         public function drawCount($count, Request $request, SessionInterface $session): Response
-        {
-            $deck = $session->get('deck');
+    {
+        $deck = $session->get('deck');
         
-            if (!$deck) {
-                $deck = new DeckOfCards();
-                $deck->shuffle();
-                $session->set('deck', $deck);
-            }
-        
-            $drawnCards = [];
-            for ($i = 0; $i < $count; $i++) {
-                $drawnCard = $deck->drawCard();
-                $drawnCards[] = $drawnCard;
-            }
-            $remainingCards = count($deck->getCards());
-        
-            return $this->render('card/count.html.twig', [
-                'drawnCards' => $drawnCards,
-                'remainingCards' => $remainingCards,
-            ]);
+        if (!$deck) {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+            $session->set('deck', $deck);
         }
+        
+        $drawnCards = [];
+        for ($i = 0; $i < $count; $i++) {
+            $drawnCard = $deck->drawCard();
+            $drawnCards[] = $drawnCard;
+        }
+        $remainingCards = count($deck->getCards());
+        
+        $previouslyDrawnCards = $session->get('drawn_cards', []);
+        $drawnCards = array_merge($previouslyDrawnCards, $drawnCards);
+        $session->set('drawn_cards', $drawnCards);
+        
+        return $this->render('card/count.html.twig', [
+            'drawnCards' => $drawnCards,
+            'remainingCards' => $remainingCards,
+        ]);
+    }
 }

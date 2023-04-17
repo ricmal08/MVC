@@ -4,21 +4,21 @@
 
 {% block body %}
 <h1>Card game</h1>
-
-<p>För detta spel har jag skapat 3 applikationsklasser.</p>
-
-<p>Nedan är samtliga routes som används för att skapa spelet "Card Game".</p>
-
-<p>Ytterligare längre ned på sidan är en genomgång över applikationsklasserna samt strukturen på klasserna och dess relationer. Jag har även inkluderat ett UML klass diagram som visualiserar strukturen och relationerna.</p>
-
 <ul>
-    {#<li><a href="{{ path('test_roll_dice') }}">Roll one dice</li>
-    <li><a href="{{ path('test_roll_num_dices', {num: 5}) }}">Roll many dice</li>
-    <li><a href="{{ path('test_dicehand', {num: 5}) }}">Roll dicehand</li>
-    <li><a href="{{ path('pig_init_get') }}">Game Pig Start</li>#}
-    <li><a href="{{ path('card_deck') }}">Deck</li>
-    <li><a href="{{ path('card_deck_shuffle') }}">Shuffled Deck</li>
-    <li><a href="{{ path('card_deck_draw') }}">Draw</li>
+    <li><a href="{{ path('card_deck') }}">Deck</a></li>
+    <li><a href="{{ path('card_deck_shuffle') }}">Shuffled Deck</a></li>
+    <li><a href="{{ path('card_deck_draw') }}">Draw</a></li>
 </ul>
+<br>
+<p>Här är en genomgång över samtliga applikationsklasser samt struktur på klasserna och dess relationer som används i min konstruktion för 'Card Game'.</p>
+
+<p>Ytterligare längre ned på sidan har jag även inkluderat ett UML klass diagram som visualiserar strukturen och relationerna.</p>
+
+<br>
+<p>Card - En klass som representerar ett enskilt kort i en kortlek. Klassen innehåller egenskaper som färg, värde och bild.</p>
+<p>DeckOfCards - En klass som representerar en kortlek. Klassen innehåller en array av Card-objekt och metoder för att skapa, blanda och dra kort från kortleken.</p>
+<p>GameController - En controller-klass som hanterar alla förfrågningar som rör spelet. Klassen innehåller metoder för att visa kortleken, blanda kortleken och dra kort.</p>
+<p>CountController - En controller-klass som hanterar förfrågningar för att räkna antalet kort som återstår i kortleken.</p>
+<p>Twig-templates - En serie Twig-templates för att visa kortleken och resultaten av dragningarna.</p>
 
 {% endblock %}
