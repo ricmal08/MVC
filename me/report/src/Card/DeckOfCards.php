@@ -26,13 +26,13 @@ class DeckOfCards
     public function drawCard(): ?CardGraphic
     {
         $remainingCards = count($this->cards);
-    
+
         if ($remainingCards === 0) {
             return null;
         }
-    
+
         $card = array_shift($this->cards);
-    
+
         switch ($card->rank) {
             case 'ace':
                 $value = rand(1, 11);
@@ -45,7 +45,7 @@ class DeckOfCards
             default:
                 $value = $card->rank;
         }
-    
+
         return new CardGraphic($card->suit, $card->rank, $value);
     }
 

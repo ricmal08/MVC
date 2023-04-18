@@ -32,7 +32,7 @@ class LuckyControllerTwig extends AbstractController
         // Create and return the JSON response
         return new JsonResponse($data);
     }
-    
+
     #[Route("/lucky/number/twig", name: "lucky_number")]
     public function number(): Response
     {
