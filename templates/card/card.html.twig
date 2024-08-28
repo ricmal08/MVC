@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Card game</h1>
+
+<p>Här är en genomgång över samtliga applikationsklasser samt struktur på klasserna och dess relationer som används i min konstruktion för 'Card Game'.</p>
+
+<p>Ytterligare längre ned på sidan har jag även inkluderat ett UML klass diagram som visualiserar strukturen och relationerna.</p>
+
+<br>
+<p>Card - En klass som representerar ett enskilt kort i en kortlek. Klassen innehåller egenskaper som färg(suit), värde(value) och en rang(rank). Klassen innehåller också två metoder getSuit() och getRank() för att hämta färg och rang.</p>
+<p>CardHand - En klass som representerar en giv</p>
+<p>DeckOfCards - En klass som representerar en kortlek. Klassen innehåller en array av Card-objekt och metoder för att skapa, blanda och dra kort från kortleken.</p>
+<p>CardGraphic - En subklass till Card som innehåller en länk till en bild som representerar kortet.</p>
+<p>CardGameController - En controller-klass som hanterar alla förfrågningar som rör spelet. Klassen använder DeckOfCards för att skapa en kortlek och CardGraphic för att visa korten i spelet.</p>
+<p>Twig-templates - En serie Twig-templates för att visa kortleken och resultaten av dragningarna.</p>
+<br>
+<li><a href="{{ path('api_index') }}">Klicka här för att komma till min 'api/' route </a></li>
+<br>
+<br>
+<img src="{{ asset('img/uml.jpg') }}" alt="" class="uml">
+<br>
+
+{% endblock %}

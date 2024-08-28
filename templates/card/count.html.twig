@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Draw Cards{% endblock %}
+
+{% block body %}
+    <h1>Draw Cards</h1>
+    <p>Number of cards remaining: {{ remainingCards }}</p>
+    <table>
+        <tr>
+            <th>Card</th>
+        </tr>
+        {% for card in drawnCards %}
+            <tr>
+                <td>{{ card.getAsHtmlString()|raw }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
